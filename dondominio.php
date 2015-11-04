@@ -1147,31 +1147,31 @@ function dondominio_Sync($params)
 		}
 		
 		logModuleCall('dondominio', 'Sync', $params, $info->getRawResponse(), $info->getResponseData());
+		
+		//IDProtection Sync
+		$protection = ($params['idprotection']) ? true : false;
+		
+		if($protection != $info->get("whoisPrivacy") && $values['active'] == true && $values['expired'] == false){
+			//Updating IDProtection
+			try{
+				$whois = $domain->domain_update(
+					$params['sld'] . '.' . $params['tld'],
+					array(
+						'updateType' => 'whoisPrivacy',
+						'whoisPrivacy' => $protection
+					)
+				);
+				
+				logModuleCall('dondominio', 'IDProtectionSync', $params, $whois->getRawResponse(), $whois->getResponseData());
+			}catch(DonDominioAPI_Error $e){
+				//return array('error' => 'Error syncing IDProtection status: ' . $e->getMessage());
+			}
+		}
 	}catch(DonDominioAPI_Domain_NotFound $e){
 		$values['active'] = false;
 		$values['expired'] = true;
 	}catch(DonDominioAPI_Error $e){
 		return array('error' => 'Error syncing domain status: ' . $e->getMessage());
-	}
-	
-	//IDProtection Sync
-	$protection = ($params['idprotection']) ? true : false;
-	
-	if($protection != $info->get("whoisPrivacy") && $values['active'] == true && $values['expired'] == false){
-		//Updating IDProtection
-		try{
-			$whois = $domain->domain_update(
-				$params['sld'] . '.' . $params['tld'],
-				array(
-					'updateType' => 'whoisPrivacy',
-					'whoisPrivacy' => $protection
-				)
-			);
-			
-			logModuleCall('dondominio', 'IDProtectionSync', $params, $whois->getRawResponse(), $whois->getResponseData());
-		}catch(DonDominioAPI_Error $e){
-			return array('error' => 'Error syncing IDProtection status: ' . $e->getMessage());
-		}
 	}
 	
 	return $values;
