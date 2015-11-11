@@ -24,6 +24,10 @@ function dondominio_MapVAT($tld, $params)
 	
 	if(substr($tld, 0, 1) == '.') $tld = substr($tld, 1);
 	
+	if( !empty( $params['additionalfields']['VAT Number'] )){
+		return $params['additionalfields']['VAT Number'];
+	}
+	
 	switch($tld){
 	case 'co.uk':
 	case 'net.uk':
