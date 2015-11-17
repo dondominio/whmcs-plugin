@@ -153,9 +153,6 @@ $additionaldomainfields['.navy'][]		= array('Name' => 'Contact Info', 				'LangV
 $additionaldomainfields['.ltda'][]		= array('Name' => 'Authority',					'LangVar' => 'ltda_authority',		'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => false);
 $additionaldomainfields['.ltda'][]		= array('Name' => 'License Number',				'LangVar' => 'ltda_license',		'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => false);
 
-// .PRO
-$additionaldomainfields['.pro'][]		= array('Name' => 'Profession',					'LangVar' => 'pro_profession',		'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => true);
-
 // .RU
 $additionaldomainfields['.ru'][]		= array('Name' => 'Birthdate',					'LangVar' => 'ru_birthdate',		'Type' => 'text',	'Size' => 16,	'Default' => '1900-01-01',	'Required' => false);
 $additionaldomainfields['.ru'][]		= array('Name' => 'Issuer',						'LangVar' => 'ru_issuer',			'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => false);
