@@ -15,24 +15,24 @@
 /**
  * The DonDominio API Client for PHP
  */
-if(!class_exists('DonDominioAPI')){
-	require_once("lib/sdk/DonDominioAPI.php");
+if(!class_exists( 'DonDominioAPI' )){
+	require_once( "lib/sdk/DonDominioAPI.php" );
 }
 
 /**
  * Helper library.
  */
-require_once("dondominio_helper.php");
+require_once( "dondominio_helper.php" );
  
 /**
  * Initialize the plugin.
  * @return DonDominioAPI
  */
-function dondominio_init($params)
+function dondominio_init( $params )
 {
 	if(
-		!array_key_exists('apiuser', $params)
-		|| !array_key_exists('apipasswd', $params)
+		!array_key_exists( 'apiuser', $params )
+		|| !array_key_exists( 'apipasswd', $params )
 	){
 		return false;
 	}
@@ -44,12 +44,41 @@ function dondominio_init($params)
 		'versionCheck' => true,
 		'response' => array(
 			'throwExceptions' => true
+		),
+		'userAgent' => array(
+			'PluginForWHMCS' => dondominio_getVersion()
 		)
 	);
 	
-	$dondominio = new DonDominioAPI($options);
+	$dondominio = new DonDominioAPI( $options );
 	
 	return $dondominio;
+}
+
+/**
+ * Get plugin version.
+ *
+ * @return string
+ */
+function dondominio_getVersion()
+{
+	if( !file_exists( __DIR__ . '/version.json' )){
+		return 'unknown';
+	}
+	
+	$json = @file_get_contents( __DIR__ . '/version.json' );
+	
+	if( empty( $json )){
+		return 'unknown';
+	}
+	
+	$versionInfo = json_decode( $json, true );
+	
+	if( !is_array( $versionInfo ) || !array_key_exists( 'version', $versionInfo )){
+		return 'unknown';
+	}
+	
+	return $versionInfo['version'];
 }
 
 /**
@@ -63,7 +92,7 @@ function dondominio_getConfigArray()
 	
 	$customfields = "";
 	
-	while(list($cf_id, $cf_fieldname) = mysql_fetch_row($query)){
+	while( list( $cf_id, $cf_fieldname ) = mysql_fetch_row( $query )){
 		$customfields .= ',' . $cf_fieldname;
 	}
 	
@@ -163,23 +192,23 @@ function dondominio_getConfigArray()
  * @param array $params Parameters sent by WHMCS
  * @return array
  */
-function dondominio_GetNameservers($params)
+function dondominio_GetNameservers( $params )
 {
-	$dondominio = dondominio_init($params);
+	$dondominio = dondominio_init( $params );
 	
 	$tld = $params["tld"];		//Top-Level Domain (.com)
 	$sld = $params["sld"];		//Second-Level Domain (example)
 	
 	try{
-		$nameservers = $dondominio->domain_getNameServers($sld . '.' . $tld);
+		$nameservers = $dondominio->domain_getNameServers( $sld . '.' . $tld );
 	
-		foreach($nameservers->get("nameservers") as $key=>$nameserver){
-			if($key <= 5){
+		foreach( $nameservers->get( "nameservers" ) as $key=>$nameserver ){
+			if( $key <= 5 ){
 				$values["ns" . $nameserver["order"]] = $nameserver["name"];
 			}
 		}
 		
-		logModuleCall('dondominio', 'GetNameservers', $params, $nameservers->getRawResponse(), $nameservers->getResponseData()); 
+		logModuleCall( 'dondominio', 'GetNameservers', $params, $nameservers->getRawResponse(), $nameservers->getResponseData()); 
 	}catch(DonDominioAPI_Error $e){
 		return array('error' => $e->getMessage());
 	}
@@ -192,20 +221,20 @@ function dondominio_GetNameservers($params)
  * @param array $params Parameters passed by WHMCS
  * @return array
  */
-function dondominio_SaveNameservers($params)
+function dondominio_SaveNameservers( $params )
 {
-	$dondominio = dondominio_init($params);
+	$dondominio = dondominio_init( $params );
 	
 	$tld = $params["tld"];		//Top-Level Domain (.com)
 	$sld = $params["sld"];		//Second-Level Domain (example)
 	
 	$nameservers_array = array();
 	
-    if(array_key_exists("ns1", $params)) $nameservers_array[] = $params["ns1"];
-	if(array_key_exists("ns2", $params)) $nameservers_array[] = $params["ns2"];
-    if(array_key_exists("ns3", $params)) $nameservers_array[] = $params["ns3"];
-	if(array_key_exists("ns4", $params)) $nameservers_array[] = $params["ns4"];
-	if(array_key_exists("ns5", $params)) $nameservers_array[] = $params["ns5"];
+    if( array_key_exists( "ns1", $params )) $nameservers_array[] = $params["ns1"];
+	if( array_key_exists( "ns2", $params )) $nameservers_array[] = $params["ns2"];
+    if( array_key_exists( "ns3", $params )) $nameservers_array[] = $params["ns3"];
+	if( array_key_exists( "ns4", $params )) $nameservers_array[] = $params["ns4"];
+	if( array_key_exists( "ns5", $params )) $nameservers_array[] = $params["ns5"];
 		
 	try{
 		$nameservers = $dondominio->domain_updateNameServers(
@@ -213,12 +242,12 @@ function dondominio_SaveNameservers($params)
 			$nameservers_array
 		);
 		
-		logModuleCall('dondominio', 'SaveNameservers', $params, $nameservers->getRawResponse(), $nameservers->getResponseData()); 
+		logModuleCall( 'dondominio', 'SaveNameservers', $params, $nameservers->getRawResponse(), $nameservers->getResponseData()); 
 	}catch(DonDominioAPI_Error $e){
-		return array('error' => $e->getMessage());
+		return array( 'error' => $e->getMessage());
 	}
 	
-	return array('success' => true);
+	return array( 'success' => true );
 }
 
 /**
@@ -260,9 +289,9 @@ function dondominio_GetRegistrarLock($params)
  * @param array $params Parameters passed by WHMCS
  * @return array
  */
-function dondominio_SaveRegistrarLock($params)
+function dondominio_SaveRegistrarLock( $params )
 {
-	$dondominio = dondominio_init($params);
+	$dondominio = dondominio_init( $params );
 	
 	$tld = $params["tld"];		//Top-Level Domain (.com)
 	$sld = $params["sld"];		//Second-Level Domain (example)
