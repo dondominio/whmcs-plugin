@@ -196,8 +196,13 @@ function dondominio_GetNameservers( $params )
 {
 	$dondominio = dondominio_init( $params );
 	
-	$tld = $params["tld"];		//Top-Level Domain (.com)
-	$sld = $params["sld"];		//Second-Level Domain (example)
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	try{
 		$nameservers = $dondominio->domain_getNameServers( $sld . '.' . $tld );
@@ -225,8 +230,13 @@ function dondominio_SaveNameservers( $params )
 {
 	$dondominio = dondominio_init( $params );
 	
-	$tld = $params["tld"];		//Top-Level Domain (.com)
-	$sld = $params["sld"];		//Second-Level Domain (example)
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$nameservers_array = array();
 	
@@ -259,14 +269,19 @@ function dondominio_GetRegistrarLock($params)
 {
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params["tld"];		//Top-Level Domain (.com)
-	$sld = $params["sld"];		//Second-Level Domain (example)
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$lockStatus = "unlocked";
 	
 	try{
 		$status = $dondominio->domain_getInfo(
-			$params['sld'] . '.' . $params['tld'],
+			$sld . '.' . $tld,
 			array(
 				'infoType'=>'status'
 			)
@@ -293,8 +308,13 @@ function dondominio_SaveRegistrarLock( $params )
 {
 	$dondominio = dondominio_init( $params );
 	
-	$tld = $params["tld"];		//Top-Level Domain (.com)
-	$sld = $params["sld"];		//Second-Level Domain (example)
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$error = null;
 	
@@ -408,8 +428,13 @@ function dondominio_RegisterDomain($params)
 {
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params["tld"];		//Top-Level Domain (.com)
-	$sld = $params["sld"];		//Second-Level Domain (example)
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 		
 	$nameservers_array = array();
 	
@@ -533,8 +558,13 @@ function dondominio_TransferDomain($params)
 {
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$nameservers_array = array();
 	
@@ -651,8 +681,14 @@ function dondominio_RenewDomain($params)
 {
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
+	
 	$regperiod = (int) $params["regperiod"];
 	
 	try{
@@ -690,8 +726,13 @@ function dondominio_GetContactDetails($params)
 {	
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$result = array();
 	
@@ -729,8 +770,13 @@ function dondominio_SaveContactDetails($params)
 {	
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$result = array();
 	
@@ -863,22 +909,27 @@ function dondominio_SaveContactDetails($params)
  * @param array $params Parameters passed by WHMCS
  * @return array
  */
-function dondominio_GetEPPCode($params)
+function dondominio_GetEPPCode( $params )
 {
-    $dondominio = dondominio_init($params);
+    $dondominio = dondominio_init( $params );
 	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	try{
-		$authCode = $dondominio->domain_getAuthCode($sld . '.' . $tld);
+		$authCode = $dondominio->domain_getAuthCode( $sld . '.' . $tld );
 		
 		logModuleCall('dondominio', 'GetEPPCode', $params, $authCode->getRawResponse(), $authCode->getResponseData()); 
 	}catch(DonDominioAPI_Error $e){
 		return array('error' => $e->getMessage());
 	}
 	
-	return array('eppcode' => $authCode->get('authcode'));
+	return array( 'eppcode' => $authCode->get( 'authcode' ));
 }
 
 /**
@@ -886,12 +937,17 @@ function dondominio_GetEPPCode($params)
  * @param array $params Parameters passed by WHMCS
  * @return array
  */
-function dondominio_RegisterNameserver($params)
+function dondominio_RegisterNameserver( $params )
 {
-    $dondominio = dondominio_init($params);
+    $dondominio = dondominio_init( $params );
     	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 		
 	try{
 		$gluerecord = $dondominio->domain_glueRecordCreate(
@@ -902,12 +958,12 @@ function dondominio_RegisterNameserver($params)
 			)
 		);
 		
-		logModuleCall('dondominio', 'RegisterNameserver', $params, $gluerecord->getRawResponse(), $gluerecord->getResponseData()); 
+		logModuleCall( 'dondominio', 'RegisterNameserver', $params, $gluerecord->getRawResponse(), $gluerecord->getResponseData()); 
 	}catch(DonDominioAPI_Error $e){
-		return array('error' => $e->getMessage());
+		return array( 'error' => $e->getMessage());
 	}
 	
-	return array('success' => true);
+	return array( 'success' => true );
 }
 
 /**
@@ -915,12 +971,17 @@ function dondominio_RegisterNameserver($params)
  * @param array $params Parameters passed by WHMCS
  * @return array
  */ 
-function dondominio_ModifyNameserver($params)
+function dondominio_ModifyNameserver( $params )
 {
-    $dondominio = dondominio_init($params);
+    $dondominio = dondominio_init( $params );
     	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 		
 	try{
 		$gluerecord = $dondominio->domain_glueRecordUpdate(
@@ -931,7 +992,7 @@ function dondominio_ModifyNameserver($params)
 			)
 		);
 		
-		logModuleCall('dondominio', 'ModifyNameserver', $params, $gluerecord->getRawResponse(), $gluerecord->getResponseData()); 
+		logModuleCall( 'dondominio', 'ModifyNameserver', $params, $gluerecord->getRawResponse(), $gluerecord->getResponseData());
 	}catch(DonDominioAPI_Error $e){
 		return array('error' => $e->getMessage());
 	}
@@ -944,12 +1005,17 @@ function dondominio_ModifyNameserver($params)
  * @param array $params Parameters passed by WHMCS
  * @return array
  */
-function dondominio_DeleteNameserver($params)
+function dondominio_DeleteNameserver( $params )
 {
-    $dondominio = dondominio_init($params);
+    $dondominio = dondominio_init( $params );
     	
-	$tld = $params["tld"];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
 	$sld = $params["sld"];
+	$tld = $params["tld"];
 		
 	try{
 		$gluerecord = $dondominio->domain_glueRecordDelete(
@@ -976,8 +1042,13 @@ function dondominio_IDProtectToggle($params)
 {
 	$dondominio = dondominio_init($params);
 	
-	$tld = $params['tld'];
-	$sld = $params['sld'];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	//Checking for blocked status
 	try{
@@ -1023,8 +1094,13 @@ function dondominio_whoisPrivacy($params)
 	
 	$domainid = $params['domainid'];
 	
-	$sld = $params['sld'];
-	$tld = $params['tld'];
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
 	
 	$error = '';
 	
@@ -1134,9 +1210,17 @@ function dondominio_Sync($params)
 	
 	$values = array();
 	
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
+	
 	try{
 		$info = $dondominio->domain_getInfo(
-			$params['sld'] . '.' . $params['tld'],
+			$sld . '.' . $tld,
 			array(
 				'infoType' => 'status'
 			)
@@ -1184,7 +1268,7 @@ function dondominio_Sync($params)
 			//Updating IDProtection
 			try{
 				$whois = $domain->domain_update(
-					$params['sld'] . '.' . $params['tld'],
+					$sld . '.' . $tld,
 					array(
 						'updateType' => 'whoisPrivacy',
 						'whoisPrivacy' => $protection
@@ -1215,11 +1299,19 @@ function dondominio_TransferSync($params)
 {
 	$dondominio = dondominio_init($params);
 	
+	if( array_key_exists( 'original', $params )){
+		$params["sld"] = $params["original"]["sld"];
+		$params["tld"] = $params["original"]["tld"];
+	}
+	
+	$sld = $params["sld"];
+	$tld = $params["tld"];
+	
 	$values = array();
 	
 	try{
 		$info = $dondominio->domain_getInfo(
-			$params['sld'] . '.' . $params['tld'],
+			$sld . '.' . $tld,
 			array(
 				'infoType' => 'status'
 			)
