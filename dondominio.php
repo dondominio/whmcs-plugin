@@ -104,7 +104,7 @@ function dondominio_getConfigArray()
 		
 		"Description" => array(
 			"Type" => "System",
-			"Value" => "Register domains with DonDominio! Signup at <a href='https://www.dondominio.com/register/'>https://www.dondominio.com/register/</a>"
+			"Value" => "Register domains with DonDominio! Signup at <a href='https://www.dondominio.com/register/'>https://www.dondominio.com/register/</a><br /><br /><strong>Your local server IP address is " . file_get_contents( 'http://ipv4.icanhazip.com' ) . "</strong>"
 		),
 			
 		//API login details
