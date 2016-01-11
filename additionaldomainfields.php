@@ -116,7 +116,8 @@ if(array_key_exists(".es", $additionaldomainfields)){
 $additionaldomainfields['.aero'][] 		= array('Name' => 'ID', 						'LangVar' => 'aero_id', 			'Type' => 'text', 	'Size' => 50, 	'Default' => '', 	'Required' => true);
 $additionaldomainfields['.aero'][] 		= array('Name' => 'Password', 					'LangVar' => 'aero_pass', 			'Type' => 'text', 	'Size' => 50, 	'Default' => '', 	'Required' => true);
 
-// .CAT, .PL, .SCOT, .EUS, .GAL, .QUEBEC
+// .BARCELONA, .CAT, .PL, .SCOT, .EUS, .GAL, .QUEBEC
+$additionaldomainfields['.barcelona'][] = array('Name' => 'Intended Use', 				'LangVar' => 'barcelona_intendeduse','Type' => 'text', 	'Size' => 50, 	'Default' => '', 	'Required' => true);
 $additionaldomainfields['.cat'][] 		= array('Name' => 'Intended Use', 				'LangVar' => 'cat_intendeduse', 	'Type' => 'text', 	'Size' => 50, 	'Default' => '', 	'Required' => true);
 $additionaldomainfields['.pl'][] 		= array('Name' => 'Intended Use', 				'LangVar' => 'pl_intendeduse', 		'Type' => 'text', 	'Size' => 50, 	'Default' => '', 	'Required' => true);
 $additionaldomainfields['.scot'][] 		= array('Name' => 'Intended Use', 				'LangVar' => 'scot_intendeduse', 	'Type' => 'text', 	'Size' => 50, 	'Default' => '', 	'Required' => true);
