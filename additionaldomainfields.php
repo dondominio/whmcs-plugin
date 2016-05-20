@@ -125,9 +125,6 @@ $additionaldomainfields['.eus'][] 		= array('Name' => 'Intended Use', 				'LangV
 $additionaldomainfields['.gal'][]		= array('Name' => 'Intended Use', 				'LangVar' => 'gal_intendeduse', 	'Type' => 'text',	'Size' => 50, 	'Default' => '', 	'Required' => true);
 $additionaldomainfields['.quebec'][]	= array('Name' => 'Intended Use',				'LangVar' => 'quebec_intendeduse',	'Type' => 'text',	'Size' => 50, 	'Default' => '', 	'Required' => true);
 
-// .COOP
-$additionaldomainfields['.coop'][]		= array('Name' => 'CVC',						'LangVar' => 'coop_cvc',			'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => true);
-
 // .HK
 $additionaldomainfields['.hk'][]		= array('Name' => 'Birthdate',					'LangVar' => 'hk_birthdate',		'Type' => 'text',	'Size' => 16,	'Default' => '1900-01-01',	'Required' => true);
 
