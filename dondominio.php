@@ -474,9 +474,6 @@ function dondominio_RegisterDomain($params)
 		case '.quebec':
 			$fields['domainIntendedUse'] = $params['additionalfields']['Intended Use'];
 			break;
-		case '.coop':
-			$fields['coopCVC'] = $params['additionalfields']['CVC'];
-			break;
 		case '.fr':
 			$fields['ownerDateOfBirth'] = $params['additionalfields']['Birthdate'];
 			$fields['frTradeMark'] = $params['additionalfields'][''];
@@ -595,9 +592,6 @@ function dondominio_TransferDomain($params)
 	case '.gal':
 	case '.quebec':
 		$fields['domainIntendedUse'] = $params['additionalfields']['Intended Use'];
-		break;
-	case '.coop':
-		$fields['coopCVC'] = $params['additionalfields']['CVC'];
 		break;
 	case '.fr':
 		$fields['ownerDateOfBirth'] = $params['additionalfields']['Birthdate'];
