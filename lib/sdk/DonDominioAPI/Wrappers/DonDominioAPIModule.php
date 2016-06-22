@@ -238,7 +238,7 @@ abstract class DonDominioAPIModule
 					 */
 					case 'phone':
 						if(!preg_match('/^\+(\d+)\.(\d+)$/i', $value)){
-							$errors[] = 'Parameter "' . $parameter['name'] . '" must be a valid phone number, in +DD.DDDDDDDDD... format';
+							$errors[] = 'Parameter "' . $parameter['name'] . '" must be a valid phone number, in +DD.DDDDDDDD... format';
 						}
 						
 						break;
