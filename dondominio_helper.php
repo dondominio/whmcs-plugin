@@ -24,6 +24,10 @@ function dondominio_MapVAT($tld, $params)
 	
 	if(substr($tld, 0, 1) == '.') $tld = substr($tld, 1);
 	
+	if( array_key_exists( 'ID Form Number', $params['additionalfields'] ) && strlen( $params['additionalfields']['ID Form Number'] )){
+		return $params['additionalfields']['ID Form Number'];
+	}
+	
 	if( !empty( $params['additionalfields']['VAT Number'] )){
 		return $params['additionalfields']['VAT Number'];
 	}
