@@ -91,10 +91,18 @@ function dondominio_MapVAT($tld, $params)
 		
 		if(mysql_num_rows($query) == 1){
 			list($fieldID) = mysql_fetch_row($query);
-			
-			$fieldID = $fieldID - 1;
-			
-			$vatNumber = $params['customfields'][$fieldID]['value'];			
+		
+			foreach( $params['customfields'] as $custom_field ){
+				if( $custom_field['id'] == $fieldID ){
+					$vatNumber = $custom_field['value'];
+					break;
+				}
+			}
+
+			if( empty( $vatNumber )){
+				$fieldID = $fieldID - 1;
+				$vatNumber = $params['customfields'][$fieldID]['value'];
+			}
 		}
 	}
 	
