@@ -40,7 +40,7 @@ function dondominio_init( $params )
 	$options = array(
 		'apiuser' => $params['apiuser'],
 		'apipasswd' => $params['apipasswd'],
-		'autoValidate' => true,
+		'autoValidate' => false,
 		'versionCheck' => true,
 		'response' => array(
 			'throwExceptions' => true
