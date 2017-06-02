@@ -128,11 +128,6 @@ $additionaldomainfields['.quebec'][]	= array('Name' => 'Intended Use',				'LangV
 // .HK
 $additionaldomainfields['.hk'][]		= array('Name' => 'Birthdate',					'LangVar' => 'hk_birthdate',		'Type' => 'text',	'Size' => 16,	'Default' => '1900-01-01',	'Required' => true);
 
-
-// .IT
-$additionaldomainfields['.it'][]		= array('Name' => 'Birthdate',					'LangVar' => 'it_birthdate',		'Type' => 'text',	'Size' => 16,	'Default' => '1900-01-01',	'Required' => true);
-$additionaldomainfields['.it'][]		= array('Name' => 'Birthplace',					'LangVar' => 'it_birthplace',		'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => true);
-
 // .JOBS
 $additionaldomainfields['.jobs'][]		= array('Name' => 'Owner Website',				'LangVar' => 'jobs_ownerwebsite',	'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => true);
 $additionaldomainfields['.jobs'][]		= array('Name' => 'Admin Contact Website',		'LangVar' => 'jobs_adminwebsite',	'Type' => 'text',	'Size' => 50,	'Default' => '',	'Required' => true);

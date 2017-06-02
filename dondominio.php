@@ -597,10 +597,6 @@ function dondominio_TransferDomain($params)
 	case '.hk':
 		$fields['ownerDateOfBirth'] = $params['additionalfields']['Birthdate'];
 		break;
-	case '.it':
-		$fields['ownerDateOfBirth'] = $params['additionalfields']['Birthdate'];
-		$fields['ownerPlaceOfBirth'] = $params['additionalfields']['Birthplace'];
-		break;
 	case '.jobs':
 		$fields['jobsOwnerWebsite'] = $params['additionalfields']['Owner Website'];
 		$fields['jobsAdminWebsite'] = $params['additionalfields']['Admin Contact Website'];
