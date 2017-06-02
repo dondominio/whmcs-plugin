@@ -40,7 +40,7 @@ function dondominio_init( $params )
 	$options = array(
 		'apiuser' => $params['apiuser'],
 		'apipasswd' => $params['apipasswd'],
-		'autoValidate' => true,
+		'autoValidate' => false,
 		'versionCheck' => true,
 		'response' => array(
 			'throwExceptions' => true
@@ -481,10 +481,6 @@ function dondominio_RegisterDomain($params)
 			break;
 		case '.hk':
 			$fields['ownerDateOfBirth'] = $params['additionalfields']['Birthdate'];
-			break;
-		case '.it':
-			$fields['ownerDateOfBirth'] = $params['additionalfields']['Birthdate'];
-			$fields['ownerPlaceOfBirth'] = $params['additionalfields']['Birthplace'];
 			break;
 		case '.jobs':
 			$fields['jobsOwnerWebsite'] = $params['additionalfields']['Owner Website'];

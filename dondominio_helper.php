@@ -24,7 +24,17 @@ function dondominio_MapVAT($tld, $params)
 	
 	if(substr($tld, 0, 1) == '.') $tld = substr($tld, 1);
 	
-	if( !empty( $params['additionalfields']['VAT Number'] )){
+	/*
+	 * WHMCS 7.1 new "ID Form Number" field override.
+	 */
+	if( array_key_exists( 'ID Form Number', $params['additionalfields'] ) && strlen( $params['additionalfields']['ID Form Number'] ) > 0 ){
+		return $params['additionalfields']['ID Form Number'];
+	}
+	
+	/*
+	 * VAT Number custom field override.
+	 */
+	if( array_key_exists( 'VAT Number', $params['additionalfields'] ) && strlen( $params['additionalfields']['VAT Number'] ) > 0 ){
 		return $params['additionalfields']['VAT Number'];
 	}
 	
