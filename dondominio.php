@@ -129,6 +129,14 @@ function dondominio_getConfigArray()
 			"Description" => "Custom field containing the VAT Number for your customers"
 		),
 		
+		//FOACONTACT
+		"foacontact" => array(
+			"FriendlyName" => "FOA Contact",
+			"Type" => "dropdown",
+			"Options" => "Owner,Admin",
+			"Description" => "Domain contact to use for FOA"
+		),
+		
 		//Owner Contact Override
 		"ownerContact" => array(
 			"FriendlyName" => "Owner Contact DonDominio ID",
@@ -640,6 +648,11 @@ function dondominio_TransferDomain($params)
 		$fields['lawaccjurcc'] = $params['additionalfields']['Country'];
 		$fields['lawaccjurst'] = $params['additionalfields']['State/Province'];
 		break;
+	}
+	
+	//FOA Contact
+	if( !empty( $params['foacontact'] )){
+		$fields['foacontact'] = strtolower( $params['foacontact'] );
 	}
 	
 	try{		
