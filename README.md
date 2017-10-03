@@ -1,7 +1,7 @@
 # WHMCS Registrar Plugin from DonDominio/MrDomain
 
-This is the WHMCS Registrar Plugin from DonDominio/MrDomain. Once installed on any WHMCS 5.x or
-6.x system, it will allow to register, renew, and transfer domains using the DonDominio/MrDomain
+This is the WHMCS Registrar Plugin from DonDominio/MrDomain. Once installed on any WHMCS 5.x,
+6.x, or 7.x system, it will allow to register, renew, and transfer domains using the DonDominio/MrDomain
 API.
 
 The plugin also provides support for managing domain contacts.
@@ -12,7 +12,7 @@ For documentation, more information, support, and guides, visit
 # Plugin de Registro para WHMCS de DonDominio/MrDomain
 
 Este es el Plugin de Registro para WHMCS de DonDominio/MrDomain. Una vez instalado en cualquier 
-sistema WHMCS 5.x o 6.x, permitirá registrar, renovar y transferir dominios usando la API de
+sistema WHMCS 5.x, 6.x o 7.x, permitirá registrar, renovar y transferir dominios usando la API de
 DonDominio/MrDomain.
 
 El plugin también ofrece soporte para gestionar contactos de dominios.
