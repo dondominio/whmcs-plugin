@@ -1266,7 +1266,7 @@ function dondominio_Sync($params)
 		if($protection != $info->get("whoisPrivacy") && $values['active'] == true && $values['expired'] == false){
 			//Updating IDProtection
 			try{
-				$whois = $domain->domain_update(
+				$whois = $dondominio->domain_update(
 					$sld . '.' . $tld,
 					array(
 						'updateType' => 'whoisPrivacy',
