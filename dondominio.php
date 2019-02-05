@@ -48,13 +48,26 @@ function dondominio_init( $params )
 			'throwExceptions' => true
 		),
 		'userAgent' => array(
-			'PluginForWHMCS' => dondominio_getVersion()
+			'PluginForWHMCS' => dondominio_getVersion(),
+			'WHMCS' => dondominio_getWHMCSVersion()
 		)
 	);
 	
 	$dondominio = new DonDominioAPI( $options );
 	
 	return $dondominio;
+}
+
+/**
+ * Get current WHMCS version.
+ */
+function dondominio_getWHMCSVersion()
+{
+	$q_version = full_query( "SELECT value FROM tblconfiguration WHERE setting = 'version'" );
+	
+	list( $version ) = mysql_fetch_row( $q_version );
+	
+	return $version;
 }
 
 /**
@@ -131,6 +144,14 @@ function dondominio_getConfigArray()
 			"Description" => "Custom field containing the VAT Number for your customers"
 		),
 		
+		//FOACONTACT	
+		"foacontact" => array(	
+			"FriendlyName" => "FOA Contact",	
+			"Type" => "dropdown",	
+			"Options" => "Owner,Admin",	
+			"Description" => "Domain contact to use for FOA"	
+		),
+
 		//Owner Contact Override
 		"ownerContact" => array(
 			"FriendlyName" => "Owner Contact DonDominio ID",
@@ -628,6 +649,7 @@ function dondominio_TransferDomain($params)
 	case '.travel':
 		$fields['travelUIN'] = $params['additionalfields']['UIN'];
 		break;
+		
 	case '.xxx':
 		$fields['xxxClass'] = $params['additionalfields']['Class'];
 		$fields['xxxName'] = $params['additionalfields']['Name'];
@@ -642,6 +664,11 @@ function dondominio_TransferDomain($params)
 		$fields['lawaccjurcc'] = $params['additionalfields']['Country'];
 		$fields['lawaccjurst'] = $params['additionalfields']['State/Province'];
 		break;
+	}
+
+	//FOA Contact	
+	if( !empty( $params['foacontact'] )){	
+		$fields['foacontact'] = strtolower( $params['foacontact'] );	
 	}
 	
 	try{		
