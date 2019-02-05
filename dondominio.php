@@ -23,7 +23,9 @@ if(!class_exists( 'DonDominioAPI' )){
  * Helper library.
  */
 require_once( "dondominio_helper.php" );
- 
+
+
+
 /**
  * Initialize the plugin.
  * @return DonDominioAPI
@@ -127,14 +129,6 @@ function dondominio_getConfigArray()
 			"Type" => "dropdown",
 			"Options" => $customfields,
 			"Description" => "Custom field containing the VAT Number for your customers"
-		),
-		
-		//FOACONTACT
-		"foacontact" => array(
-			"FriendlyName" => "FOA Contact",
-			"Type" => "dropdown",
-			"Options" => "Owner,Admin",
-			"Description" => "Domain contact to use for FOA"
 		),
 		
 		//Owner Contact Override
@@ -648,11 +642,6 @@ function dondominio_TransferDomain($params)
 		$fields['lawaccjurcc'] = $params['additionalfields']['Country'];
 		$fields['lawaccjurst'] = $params['additionalfields']['State/Province'];
 		break;
-	}
-	
-	//FOA Contact
-	if( !empty( $params['foacontact'] )){
-		$fields['foacontact'] = strtolower( $params['foacontact'] );
 	}
 	
 	try{		
@@ -1266,7 +1255,7 @@ function dondominio_Sync($params)
 		if($protection != $info->get("whoisPrivacy") && $values['active'] == true && $values['expired'] == false){
 			//Updating IDProtection
 			try{
-				$whois = $domain->domain_update(
+				$whois = $dondominio->domain_update(
 					$sld . '.' . $tld,
 					array(
 						'updateType' => 'whoisPrivacy',
@@ -1279,6 +1268,9 @@ function dondominio_Sync($params)
 				//return array('error' => 'Error syncing IDProtection status: ' . $e->getMessage());
 			}
 		}
+
+		$dondominio->close();
+		$dondominio = null;
 	}catch(DonDominioAPI_Domain_NotFound $e){
 		$values['active'] = false;
 		$values['expired'] = true;
@@ -1328,6 +1320,9 @@ function dondominio_TransferSync($params)
 			$values['failed'] = true;
 		}
 		
+		$dondominio->close();
+		$dondominio = null;
+
 		logModuleCall('dondominio', 'TransferSync', $params, $info->getRawResponse(), $info->getResponseData());
 	}catch(DonDominioAPI_Error $e){
 		return array('error' => $e->getMessage());

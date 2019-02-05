@@ -50,6 +50,7 @@ class DonDominioAPI extends DonDominioAPIClientPostCurl
 	protected $contact;
 	protected $domain;
 	protected $tool;
+	protected $service;
 	/**#@-*/
 	
 	/**
@@ -110,6 +111,13 @@ class DonDominioAPI extends DonDominioAPIClientPostCurl
 			$this->domain = new DonDominioAPI_Domain($this);
 			$this->tool = new DonDominioAPI_Tool($this);
 			$this->service = new DonDominioAPI_Service( $this );
+		}
+	}
+
+	public function close()
+	{
+		if( is_object( $this->client )){
+			$this->client->close();
 		}
 	}
 	
