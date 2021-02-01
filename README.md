@@ -1,21 +1,16 @@
-# WHMCS Registrar Plugin from DonDominio/MrDomain
-
-This is the WHMCS Registrar Plugin from DonDominio/MrDomain. Once installed on any WHMCS 5.x,
-6.x, or 7.x system, it will allow to register, renew, and transfer domains using the DonDominio/MrDomain
-API.
-
-The plugin also provides support for managing domain contacts.
-
-For documentation, more information, support, and guides, visit
-[dev.mrdomain.com/api/docs/sdk-php/](https://dev.mrdomain.com/api/docs/sdk-php/).
-
 # Plugin de Registro para WHMCS de DonDominio/MrDomain
 
-Este es el Plugin de Registro para WHMCS de DonDominio/MrDomain. Una vez instalado en cualquier 
-sistema WHMCS 5.x, 6.x o 7.x, permitirá registrar, renovar y transferir dominios usando la API de
-DonDominio/MrDomain.
+## Este proyecto ha sido declarado obsoleto.
+## This project has been deprecated.
 
-El plugin también ofrece soporte para gestionar contactos de dominios.
+### WHMCS 7 y 8
 
-Para más información, documentación, soporte y guías, visita
-[dev.dondominio.com/whmcs/docs/plugin](https://dev.dondominio.com/whmcs/docs/plugin/).
+Su funcionalidad está incorporada en [Módulos de Integración DonDominio - WHMCS](https://github.com/dondominio/whmcs)
+
+This functionality is now built in [MrDomain - WHMCS Modules Integration](https://github.com/dondominio/whmcs)
+
+### WHMCS 6
+
+Si todavía está usando la versión 6 de WHMCS o inferior, le recomendamos que descargue e instale [ésta versión](https://github.com/dondominio/whmcs-plugin/releases) aunque está totalmente descatalogada y le recomendamos que actualice su panel de WHMCS a la última versión.
+
+If you are still using WHMCS version 6 or lower, we recommend that you download and install [this version](https://github.com/dondominio/whmcs-plugin/releases) although it is completely discontinued and we recommend that you update your WHMCS to the latest version.
